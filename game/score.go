@@ -2,6 +2,7 @@ package game
 
 import (
 	"fmt"
+	"slices"
 
 	"github.com/gdamore/tcell"
 )
@@ -37,7 +38,7 @@ func checkScore(ev *tcell.EventKey, screen tcell.Screen) {
 		} else if i < 5 {
 			addScore = 2
 		}
-		if contains(line, mapRuneToIndex(ev.Rune())) {
+		if slices.Contains(line, mapRuneToIndex(ev.Rune())) {
 			score += addScore
 			combo += 1
 			return // don't check further - key is used already

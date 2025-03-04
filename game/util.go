@@ -18,12 +18,3 @@ func weightedRandom(p int, max int) int {
 		return 0
 	}
 }
-
-func contains(slice []int, item int) bool {
-	for _, v := range slice {
-		if v == item {
-			return true
-		}
-	}
-	return false
-}
