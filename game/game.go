@@ -15,7 +15,7 @@ const (
 	fps    = 10 // frames per second
 )
 
-var keys = []rune{'s', 'd', 'f', 'g', 'h', 'j', 'k', 'l'}
+var keys = []rune{'a', 's', 'd', 'f', 'j', 'k', 'l', ';'}
 var width = len(keys)
 
 var style = tcell.StyleDefault.Foreground(tcell.ColorWhite)
