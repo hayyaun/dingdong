@@ -7,11 +7,13 @@ import (
 	"github.com/gdamore/tcell"
 )
 
-const height = 20 // game box height
-const padx = 6    // padding
-const spfx = 6    // space factor horizontal
-const spfy = 1    // space factor vertical
-const fps = 10    // frames per second
+const (
+	height = 20 // game box height
+	padx   = 6  // padding
+	spfx   = 6  // space factor horizontal
+	spfy   = 1  // space factor vertical
+	fps    = 10 // frames per second
+)
 
 var keys = []rune{'s', 'd', 'f', 'g', 'h', 'j', 'k', 'l'}
 var width = len(keys)
@@ -66,7 +68,8 @@ func Play() {
 		case <-ticker.C:
 			// Redraw the screen periodically
 			screen.Clear()
-			updateCells()
+			updateCells() // matrix
+			updateHits()  // matrix
 			showCells(screen)
 			showKeys(screen)
 			showScore(screen)

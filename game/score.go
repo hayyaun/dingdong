@@ -7,8 +7,18 @@ import (
 	"github.com/gdamore/tcell"
 )
 
-func drawText(screen tcell.Screen, x, y int, text string) {
-	style := tcell.StyleDefault.Foreground(tcell.ColorGreen)
+const (
+	GOOD_SCORE = 5
+	MEH_SCORE  = 2
+	BAD_SCORE  = -1
+)
+
+func drawText(screen tcell.Screen, x, y int, text string, color *tcell.Color) {
+	c := tcell.ColorGreen
+	if color != nil {
+		c = *color
+	}
+	style := tcell.StyleDefault.Foreground(c)
 
 	for i, c := range text {
 		screen.SetContent(x+i, y, rune(c), nil, style) // Convert byte to rune
@@ -17,7 +27,7 @@ func drawText(screen tcell.Screen, x, y int, text string) {
 }
 
 func showScore(screen tcell.Screen) {
-	drawText(screen, padx, height+4, fmt.Sprintf("Score: %v \t\t\t Combo: %v", score, combo))
+	drawText(screen, padx, height+4, fmt.Sprintf("Score: %v \t\t\t Combo: %v", score, combo), nil)
 }
 
 func mapRuneToIndex(char rune) int {
@@ -30,22 +40,26 @@ func mapRuneToIndex(char rune) int {
 }
 
 func checkScore(ev *tcell.EventKey, screen tcell.Screen) {
-	drawText(screen, padx, height+5, fmt.Sprintf("Key: %c", ev.Rune())) // Debug
+
+	r := ev.Rune()
+
 	for i, line := range lines {
-		addScore := 0
+		if !slices.Contains(line, mapRuneToIndex(r)) {
+			continue
+		}
 		if i < 2 {
-			addScore = 5
+			score += GOOD_SCORE
+			hit(r, Good)
 		} else if i < 5 {
-			addScore = 2
+			score += MEH_SCORE
+			hit(r, Meh)
 		}
-		if slices.Contains(line, mapRuneToIndex(ev.Rune())) {
-			score += addScore
-			combo += 1
-			return // don't check further - key is used already
-		}
+		combo += 1
+		return // don't check further - key is used already
 	}
 
 	// Wrong Key - Wrong Time
-	score = max(0, score-1)
+	score = max(0, score+BAD_SCORE)
 	combo = 0
+	hit(r, Bad)
 }

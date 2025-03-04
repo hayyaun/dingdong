@@ -6,13 +6,14 @@ import (
 	"github.com/gdamore/tcell"
 )
 
-var iter = 0
+var iter = 0 // used for adding gap between rows
 
 func updateCells() {
 	iter += 1
+	ignore := iter%2 == 0 // ignore even rows
 
 	n := weightedRandom(10, 100)
-	if len(lines) < height || iter%2 == 0 {
+	if len(lines) < height || ignore {
 		n = 0
 	}
 
