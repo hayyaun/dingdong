@@ -62,8 +62,13 @@ func Play() {
 		}
 	}()
 
+	// Music
+	go PlayMusic()
+
+	// Game loop
 	for {
 		select {
+
 		case <-ticker.C:
 			// Redraw the screen periodically
 			screen.Clear()
