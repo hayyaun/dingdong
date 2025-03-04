@@ -69,6 +69,7 @@ func checkScore(ev *tcell.EventKey) {
 }
 
 func loseScore(line []*Cell) {
+	// TODO - hard-mode only
 	for _, cell := range line {
 		if cell.Status != None {
 			continue
