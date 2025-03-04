@@ -2,7 +2,6 @@ package game
 
 import (
 	"fmt"
-	"slices"
 
 	"github.com/gdamore/tcell"
 )
@@ -39,27 +38,43 @@ func mapRuneToIndex(char rune) int {
 	return -1 // Return -1 if character is not in slice
 }
 
-func checkScore(ev *tcell.EventKey, screen tcell.Screen) {
+func checkScore(ev *tcell.EventKey) {
 
 	r := ev.Rune()
+	col := mapRuneToIndex(r)
 
 	for i, line := range lines {
-		if !slices.Contains(line, mapRuneToIndex(r)) {
-			continue
+		for _, cell := range line {
+			if cell.Col != col || cell.Status != None {
+				continue // no score - 404 or already used
+			}
+			if i < 2 {
+				cell.Status = Good
+				score += GOOD_SCORE
+				hit(r, Good)
+			} else if i < 5 {
+				cell.Status = Bad
+				score += MEH_SCORE
+				hit(r, Meh)
+			}
+			combo += 1
+			return // don't check further - key is used already
 		}
-		if i < 2 {
-			score += GOOD_SCORE
-			hit(r, Good)
-		} else if i < 5 {
-			score += MEH_SCORE
-			hit(r, Meh)
-		}
-		combo += 1
-		return // don't check further - key is used already
 	}
 
 	// Wrong Key - Wrong Time
 	score = max(0, score+BAD_SCORE)
 	combo = 0
 	hit(r, Bad)
+}
+
+func loseScore(line []*Cell) {
+	for _, cell := range line {
+		if cell.Status != None {
+			continue
+		}
+		// Miss
+		score = max(0, score+BAD_SCORE)
+		combo = 0
+	}
 }

@@ -17,7 +17,6 @@ const (
 
 var keys = []rune{'s', 'd', 'f', 'g', 'h', 'j', 'k', 'l'}
 var width = len(keys)
-var lines = [][]int{}
 
 var style = tcell.StyleDefault.Foreground(tcell.ColorWhite)
 var styleBad = tcell.StyleDefault.Foreground(tcell.ColorOrangeRed)
@@ -58,7 +57,7 @@ func Play() {
 					close(quit) // Signal the main loop to exit
 					return
 				}
-				checkScore(ev, screen)
+				checkScore(ev)
 			}
 		}
 	}()
