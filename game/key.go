@@ -8,7 +8,7 @@ import (
 
 func hitLookup(r rune) Status {
 	for _, hit := range hits {
-		if hit.Rune != r {
+		if hit == nil || hit.Rune != r {
 			continue
 		}
 		return hit.Status
@@ -21,14 +21,14 @@ func showKeys(screen tcell.Screen) {
 	for i, r := range keys {
 		col := i*spfx + padx
 		status := hitLookup(r)
+		st := style
 		if status == Good {
-			screen.SetContent(col, end, unicode.ToUpper(r), nil, styleGood)
+			st = styleGood
 		} else if status == Meh {
-			screen.SetContent(col, end, unicode.ToUpper(r), nil, styleMeh)
+			st = styleMeh
 		} else if status == Bad {
-			screen.SetContent(col, end, unicode.ToUpper(r), nil, styleBad)
-		} else {
-			screen.SetContent(col, end, unicode.ToUpper(r), nil, style)
+			st = styleBad
 		}
+		screen.SetContent(col, end, unicode.ToUpper(r), nil, st)
 	}
 }

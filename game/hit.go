@@ -21,7 +21,10 @@ var hits = []*Hit{}
 
 func updateHits() {
 	for i, hit := range hits {
-		if hit != nil && hit.Persist <= 0 {
+		if hit == nil {
+			continue
+		}
+		if hit.Persist <= 0 {
 			hits = slices.Delete(hits, i, i+1)
 		}
 		hit.Persist -= 1
