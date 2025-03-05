@@ -7,22 +7,9 @@ import (
 	"github.com/gdamore/tcell"
 )
 
-const (
-	height = 20 // game box height
-	padx   = 6  // padding
-	spfx   = 6  // space factor horizontal
-	spfy   = 1  // space factor vertical
-	fps    = 10 // frames per second
-
-	MODE_HARD   = "hard"
-	MODE_NORMAL = "normal"
-	MODE_EASY   = "easy"
-)
-
-var Modes = []string{MODE_EASY, MODE_NORMAL, MODE_HARD}
-var Mode = MODE_NORMAL
-
 func Play() {
+	configMode()
+
 	screen, err := tcell.NewScreen()
 	if err != nil {
 		log.Fatalf("Error creating screen: %v", err)
@@ -36,7 +23,7 @@ func Play() {
 	// Ensure the terminal gets restored on exit
 	defer screen.Fini()
 
-	ticker := time.NewTicker(time.Second / fps)
+	ticker := time.NewTicker(time.Second / time.Duration(fps))
 	defer ticker.Stop()
 
 	// Channel for key events

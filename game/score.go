@@ -59,21 +59,26 @@ func checkScore(ev *tcell.EventKey) {
 		}
 	}
 
-	// Wrong Key
+	// Wrong Key - Hard-mode
+	if Mode != MODE_HARD {
+		return
+	}
 	score = max(0, score+BAD_SCORE)
 	combo = 0
 	hit(r, Bad)
 }
 
 // Checks outgoing cells
-// TODO - hard-mode only
 func loseScore(line []*Cell) {
 	for _, cell := range line {
 		if cell.status != None {
 			hit(cell.r, cell.status)
 			continue
 		}
-		// Miss
+		// Miss - Hard-mode
+		if Mode != MODE_HARD {
+			continue
+		}
 		score = max(0, score+BAD_SCORE)
 		combo = 0
 		hit(cell.r, Bad)
