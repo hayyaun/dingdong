@@ -23,7 +23,7 @@ func Play() {
 
 	err = screen.Init()
 	if err != nil {
-		log.Fatalln("Error initializing screen: %", err)
+		log.Fatalf("Error initializing screen: %v", err)
 	}
 
 	// Ensure the terminal gets restored on exit
