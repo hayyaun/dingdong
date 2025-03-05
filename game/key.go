@@ -4,7 +4,7 @@ import (
 	"unicode"
 
 	"github.com/gdamore/tcell"
-	. "github.com/hayyaun/dingdong/utils"
+	"github.com/hayyaun/dingdong/utils"
 )
 
 type WKey struct {
@@ -25,8 +25,8 @@ func (key *WKey) Value() any {
 	return key.r
 }
 
-func keyToWeightable(keys []WKey) []Weighable {
-	weightables := make([]Weighable, len(keys))
+func keyToWeightable(keys []WKey) []utils.Weighable {
+	weightables := make([]utils.Weighable, len(keys))
 	for i := range keys {
 		weightables[i] = &keys[i]
 	}
