@@ -1,5 +1,5 @@
 # Define the binary name
-BINARY_NAME = dingdong
+BINARY_NAME = dist/dingdong
 
 # Go build flags for optimization
 BUILD_FLAGS = -ldflags="-s -w"

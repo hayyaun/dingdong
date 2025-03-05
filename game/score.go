@@ -42,13 +42,14 @@ func checkScore(ev *tcell.EventKey) {
 				score += MEH_SCORE
 				combo += 1
 				hit(r, Meh)
-			} else {
+			} else if i < 10 {
 				// Wrong Time
 				cell.status = Bad
 				score = max(0, score+BAD_SCORE)
-				combo = 0
+				combo = 0 // reset combo
 				hit(r, Bad)
 			}
+			// else - forgive
 			return // don't check further - key is used already
 		}
 	}
