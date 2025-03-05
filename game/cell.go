@@ -57,7 +57,8 @@ func showCells(screen tcell.Screen) {
 			i := mapRuneToIndex(cell.r)
 			col := i*spfx + padx
 			r := unicode.ToUpper(cell.r)
-			screen.SetContent(col, row, r, nil, style) // Draw cell
+			st := cell.status.toStyle()
+			screen.SetContent(col, row, r, nil, st) // Draw cell
 		}
 	}
 }

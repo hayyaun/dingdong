@@ -47,14 +47,7 @@ func showKeys(screen tcell.Screen) {
 	for i, k := range keys {
 		col := i*spfx + padx
 		status := hitLookup(k.v)
-		st := style
-		if status == Good {
-			st = styleGood
-		} else if status == Meh {
-			st = styleMeh
-		} else if status == Bad {
-			st = styleBad
-		}
+		st := status.toStyle()
 		screen.SetContent(col, end, unicode.ToUpper(k.v), nil, st)
 	}
 }

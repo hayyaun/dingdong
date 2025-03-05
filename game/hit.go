@@ -1,6 +1,10 @@
 package game
 
-import "slices"
+import (
+	"slices"
+
+	"github.com/gdamore/tcell"
+)
 
 type Status int
 
@@ -18,6 +22,17 @@ type Hit struct {
 }
 
 var hits = []*Hit{}
+
+func (status Status) toStyle() tcell.Style {
+	if status == Good {
+		return styleGood
+	} else if status == Meh {
+		return styleMeh
+	} else if status == Bad {
+		return styleBad
+	}
+	return style
+}
 
 func updateHits() {
 	for i, hit := range hits {

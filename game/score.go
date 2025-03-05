@@ -41,18 +41,25 @@ func checkScore(ev *tcell.EventKey) {
 			if i < 2 {
 				cell.status = Good
 				score += GOOD_SCORE
+				combo += 1
 				hit(r, Good)
 			} else if i < 5 {
-				cell.status = Bad
+				cell.status = Meh
 				score += MEH_SCORE
+				combo += 1
 				hit(r, Meh)
+			} else {
+				// Wrong Time
+				cell.status = Bad
+				score = max(0, score+BAD_SCORE)
+				combo = 0
+				hit(r, Bad)
 			}
-			combo += 1
 			return // don't check further - key is used already
 		}
 	}
 
-	// Wrong Key - Wrong Time
+	//  Wrong Time
 	score = max(0, score+BAD_SCORE)
 	combo = 0
 	hit(r, Bad)
