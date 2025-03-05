@@ -19,7 +19,7 @@ func updateCells() {
 	iter += 1
 	ignore := iter%2 == 0 // ignore even rows
 
-	// Chance of 1 - 2 - 3 - 4 - 0 particles
+	// Chance of 0 - 1 - 2 - 3 - 4 cells
 	n := weightedRandom(chanceToWeightable(chances)).(int)
 	if len(lines) < height || ignore {
 		n = 0
