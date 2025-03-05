@@ -32,19 +32,18 @@ func showScore(screen tcell.Screen) {
 func checkScore(ev *tcell.EventKey) {
 
 	r := ev.Rune()
-	col := mapRuneToIndex(r)
 
 	for i, line := range lines {
 		for _, cell := range line {
-			if cell.Col != col || cell.Status != None {
+			if cell.r != r || cell.status != None {
 				continue // no score - 404 or already used
 			}
 			if i < 2 {
-				cell.Status = Good
+				cell.status = Good
 				score += GOOD_SCORE
 				hit(r, Good)
 			} else if i < 5 {
-				cell.Status = Bad
+				cell.status = Bad
 				score += MEH_SCORE
 				hit(r, Meh)
 			}
@@ -62,7 +61,7 @@ func checkScore(ev *tcell.EventKey) {
 func loseScore(line []*Cell) {
 	// TODO - hard-mode only
 	for _, cell := range line {
-		if cell.Status != None {
+		if cell.status != None {
 			continue
 		}
 		// Miss

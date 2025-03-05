@@ -7,8 +7,8 @@ import (
 )
 
 type Cell struct {
-	Col    int
-	Status Status
+	r      rune
+	status Status
 }
 
 var lines = [][]*Cell{}
@@ -29,8 +29,7 @@ func updateCells() {
 	line := []*Cell{}
 	for i := 0; i < n; i += 1 {
 		r := weightedRandom(keyToWeightable(keys)).(rune)
-		col := mapRuneToIndex(r)
-		line = append(line, &Cell{Col: col, Status: None})
+		line = append(line, &Cell{r: r, status: None})
 	}
 
 	lines = append(lines, line)
@@ -55,8 +54,9 @@ func showCells(screen tcell.Screen) {
 		}
 		// Show Particles
 		for _, cell := range line {
-			col := cell.Col*spfx + padx
-			r := unicode.ToUpper(mapIndexToRune(cell.Col))
+			i := mapRuneToIndex(cell.r)
+			col := i*spfx + padx
+			r := unicode.ToUpper(cell.r)
 			screen.SetContent(col, row, r, nil, style) // Draw cell
 		}
 	}
