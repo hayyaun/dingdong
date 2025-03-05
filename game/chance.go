@@ -14,7 +14,7 @@ func (chance *Chance) Value() any {
 }
 
 var chances = []Chance{
-	{v: 4, w: 1}, {v: 3, w: 2}, {v: 2, w: 5}, {v: 1, w: 20}, {v: 0, w: 100},
+	{v: 4, w: 1}, {v: 3, w: 1}, {v: 2, w: 2}, {v: 1, w: 100}, {v: 0, w: 200},
 }
 
 func chanceToWeightable(chances []Chance) []Weightable {

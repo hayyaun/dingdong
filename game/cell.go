@@ -17,7 +17,7 @@ var iter = 0 // used for adding gap between rows
 
 func updateCells() {
 	iter += 1
-	ignore := iter%2 == 0 // ignore even rows
+	ignore := iter%3 != 0 // ignore some rows
 
 	// Chance of 0 - 1 - 2 - 3 - 4 cells
 	n := weightedRandom(chanceToWeightable(chances)).(int)
