@@ -1,8 +1,6 @@
 package game
 
 import (
-	"math/rand"
-
 	"github.com/gdamore/tcell"
 )
 
@@ -15,18 +13,23 @@ var lines = [][]*Cell{}
 
 var iter = 0 // used for adding gap between rows
 
+var chances = []Weightable{
+	{v: 4, w: 1}, {v: 3, w: 2}, {v: 2, w: 5}, {v: 1, w: 20}, {v: 0, w: 100},
+}
+
 func updateCells() {
 	iter += 1
 	ignore := iter%2 == 0 // ignore even rows
 
-	n := weightedRandom(10, 100)
+	n := weightedRandom(chances).(int)
 	if len(lines) < height || ignore {
 		n = 0
 	}
 
 	line := []*Cell{}
 	for i := 0; i < n; i += 1 {
-		col := rand.Intn(width)
+		r := weightedRandom(keys.ToWeightables()).(rune)
+		col := mapRuneToIndex(r)
 		line = append(line, &Cell{Col: col, Status: None})
 	}
 

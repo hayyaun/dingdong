@@ -15,9 +15,6 @@ const (
 	fps    = 10 // frames per second
 )
 
-var keys = []rune{'a', 's', 'd', 'f', 'j', 'k', 'l', ';'}
-var width = len(keys)
-
 var style = tcell.StyleDefault.Foreground(tcell.ColorWhite)
 var styleBad = tcell.StyleDefault.Foreground(tcell.ColorOrangeRed)
 var styleMeh = tcell.StyleDefault.Foreground(tcell.ColorYellow)

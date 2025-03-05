@@ -30,8 +30,8 @@ func showScore(screen tcell.Screen) {
 }
 
 func mapRuneToIndex(char rune) int {
-	for i, c := range keys {
-		if c == char {
+	for i, k := range keys {
+		if k.v == char {
 			return i
 		}
 	}

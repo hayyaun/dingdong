@@ -2,19 +2,31 @@ package game
 
 import "math/rand"
 
-func weightedRandom(p int, max int) int {
-	r := rand.Intn(max)
+type Weightable struct {
+	v any // value
+	w int // wright
+}
 
-	switch {
-	case r < p/10:
-		return 4
-	case r < p/10*2:
-		return 3
-	case r < p/10*5:
-		return 2
-	case r < p:
-		return 1
-	default:
-		return 0
+func weightedRandom(items []Weightable) any {
+
+	// Calculate total weight
+	total := 0
+	for _, item := range items {
+		total += item.w
 	}
+
+	// Generate a random weight
+	r := rand.Intn(total)
+
+	// Find random position inside items range
+	cumu := 0
+	for _, item := range items {
+		cumu += item.w
+		if r < cumu {
+			return item.v
+		}
+	}
+
+	// Fallback value - never
+	return items[0].v
 }
