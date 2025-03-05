@@ -68,12 +68,14 @@ func checkScore(ev *tcell.EventKey) {
 // Checks outgoing cells
 // TODO - hard-mode only
 func loseScore(line []*Cell) {
-	// for _, cell := range line {
-	// 	if cell.status != None {
-	// 		continue
-	// 	}
-	// 	// Miss
-	// 	score = max(0, score+BAD_SCORE)
-	// 	combo = 0
-	// }
+	for _, cell := range line {
+		if cell.status != None {
+			hit(cell.r, cell.status)
+			continue
+		}
+		// Miss
+		score = max(0, score+BAD_SCORE)
+		combo = 0
+		hit(cell.r, Bad)
+	}
 }
