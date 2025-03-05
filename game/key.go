@@ -11,18 +11,23 @@ type WKey struct {
 	w int // Weight
 }
 
-type WKeySlice []WKey
-
-var keys = WKeySlice{
+var keys = []WKey{
 	{v: 'a', w: 1}, {v: 's', w: 1}, {v: 'd', w: 2}, {v: 'f', w: 5}, // left hand
 	{v: 'j', w: 5}, {v: 'k', w: 2}, {v: 'l', w: 1}, {v: ';', w: 1}, // right hand
 }
 
-// Method to convert WKeySlice to []Weightable
-func (keys WKeySlice) ToWeightables() []Weightable {
+func (key *WKey) Weight() int {
+	return key.w
+}
+
+func (key *WKey) Value() any {
+	return key.v
+}
+
+func keyToWeightable(keys []WKey) []Weightable {
 	weightables := make([]Weightable, len(keys))
-	for i, k := range keys {
-		weightables[i] = Weightable{v: k.v, w: k.w}
+	for i := range keys {
+		weightables[i] = &keys[i]
 	}
 	return weightables
 }

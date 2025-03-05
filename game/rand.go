@@ -2,9 +2,9 @@ package game
 
 import "math/rand"
 
-type Weightable struct {
-	v any // value
-	w int // wright
+type Weightable interface {
+	Value() any
+	Weight() int
 }
 
 func weightedRandom(items []Weightable) any {
@@ -12,7 +12,7 @@ func weightedRandom(items []Weightable) any {
 	// Calculate total weight
 	total := 0
 	for _, item := range items {
-		total += item.w
+		total += item.Weight()
 	}
 
 	// Generate a random weight
@@ -21,12 +21,12 @@ func weightedRandom(items []Weightable) any {
 	// Find random position inside items range
 	cumu := 0
 	for _, item := range items {
-		cumu += item.w
+		cumu += item.Weight()
 		if r < cumu {
-			return item.v
+			return item.Value()
 		}
 	}
 
 	// Fallback value - never
-	return items[0].v
+	return items[0].Value()
 }

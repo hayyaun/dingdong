@@ -13,22 +13,20 @@ var lines = [][]*Cell{}
 
 var iter = 0 // used for adding gap between rows
 
-var chances = []Weightable{
-	{v: 4, w: 1}, {v: 3, w: 2}, {v: 2, w: 5}, {v: 1, w: 20}, {v: 0, w: 100},
-}
-
 func updateCells() {
 	iter += 1
 	ignore := iter%2 == 0 // ignore even rows
 
-	n := weightedRandom(chances).(int)
+	// Chance of 1 - 2 - 3 - 4 - 0 elements
+	n := weightedRandom(chanceToWeightable(chances)).(int)
 	if len(lines) < height || ignore {
 		n = 0
 	}
 
+	// Fill a line with keys
 	line := []*Cell{}
 	for i := 0; i < n; i += 1 {
-		r := weightedRandom(keys.ToWeightables()).(rune)
+		r := weightedRandom(keyToWeightable(keys)).(rune)
 		col := mapRuneToIndex(r)
 		line = append(line, &Cell{Col: col, Status: None})
 	}
