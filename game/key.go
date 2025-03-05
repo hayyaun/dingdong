@@ -7,13 +7,13 @@ import (
 )
 
 type WKey struct {
-	v rune
+	r rune
 	w int // Weight
 }
 
 var keys = []WKey{
-	{v: 'a', w: 1}, {v: 's', w: 1}, {v: 'd', w: 2}, {v: 'f', w: 5}, // left hand
-	{v: 'j', w: 5}, {v: 'k', w: 2}, {v: 'l', w: 1}, {v: ';', w: 1}, // right hand
+	{r: 'a', w: 1}, {r: 's', w: 1}, {r: 'd', w: 2}, {r: 'f', w: 5}, // left hand
+	{r: 'j', w: 5}, {r: 'k', w: 2}, {r: 'l', w: 1}, {r: ';', w: 1}, // right hand
 }
 
 func (key *WKey) Weight() int {
@@ -21,7 +21,7 @@ func (key *WKey) Weight() int {
 }
 
 func (key *WKey) Value() any {
-	return key.v
+	return key.r
 }
 
 func keyToWeightable(keys []WKey) []Weightable {
@@ -34,10 +34,10 @@ func keyToWeightable(keys []WKey) []Weightable {
 
 func hitLookup(r rune) Status {
 	for _, hit := range hits {
-		if hit == nil || hit.Rune != r {
+		if hit == nil || hit.r != r {
 			continue
 		}
-		return hit.Status
+		return hit.status
 	}
 	return None
 }
@@ -46,8 +46,8 @@ func showKeys(screen tcell.Screen) {
 	end := (height + 1) * spfy
 	for i, k := range keys {
 		col := i*spfx + padx
-		status := hitLookup(k.v)
+		status := hitLookup(k.r)
 		st := status.toStyle()
-		screen.SetContent(col, end, unicode.ToUpper(k.v), nil, st)
+		screen.SetContent(col, end, unicode.ToUpper(k.r), nil, st)
 	}
 }
