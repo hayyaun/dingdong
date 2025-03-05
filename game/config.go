@@ -15,7 +15,7 @@ var fps uint = 10 // frames per second
 var Modes = []string{MODE_EASY, MODE_NORMAL, MODE_HARD}
 var Mode = MODE_NORMAL
 
-func configMode() {
+func config() {
 	switch Mode {
 	case MODE_EASY:
 		fps = 6

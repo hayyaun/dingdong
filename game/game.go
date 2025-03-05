@@ -8,7 +8,8 @@ import (
 )
 
 func Play() {
-	configMode()
+
+	config()
 
 	screen, err := tcell.NewScreen()
 	if err != nil {
