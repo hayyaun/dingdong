@@ -25,8 +25,8 @@ func (key *WKey) Value() any {
 	return key.r
 }
 
-func keyToWeightable(keys []WKey) []Weightable {
-	weightables := make([]Weightable, len(keys))
+func keyToWeightable(keys []WKey) []Weighable {
+	weightables := make([]Weighable, len(keys))
 	for i := range keys {
 		weightables[i] = &keys[i]
 	}

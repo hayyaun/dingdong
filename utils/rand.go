@@ -2,12 +2,12 @@ package utils
 
 import "math/rand"
 
-type Weightable interface {
+type Weighable interface {
 	Value() any
 	Weight() int
 }
 
-func WeightedRandom(items []Weightable) any {
+func WeightedRandom(items []Weighable) any {
 
 	// Calculate total weight
 	total := 0
