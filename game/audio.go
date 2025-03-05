@@ -10,7 +10,7 @@ import (
 	"github.com/faiface/beep/speaker"
 )
 
-func PlayMusic() {
+func playMusic() {
 
 	defer func() {
 		if r := recover(); r != nil {

@@ -51,7 +51,7 @@ func Play() {
 	}()
 
 	// Music
-	go PlayMusic()
+	go playMusic()
 
 	// Game loop
 	for {
