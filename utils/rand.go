@@ -1,4 +1,4 @@
-package game
+package utils
 
 import "math/rand"
 
@@ -7,7 +7,7 @@ type Weightable interface {
 	Weight() int
 }
 
-func weightedRandom(items []Weightable) any {
+func WeightedRandom(items []Weightable) any {
 
 	// Calculate total weight
 	total := 0

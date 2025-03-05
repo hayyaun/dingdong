@@ -5,9 +5,9 @@ go 1.22.2
 require github.com/spf13/cobra v1.9.1
 
 require (
-	github.com/faiface/beep v1.1.0 // indirect
+	github.com/faiface/beep v1.1.0
 	github.com/gdamore/encoding v1.0.1 // indirect
-	github.com/gdamore/tcell v1.4.0 // indirect
+	github.com/gdamore/tcell v1.4.0
 	github.com/hajimehoshi/go-mp3 v0.3.0 // indirect
 	github.com/hajimehoshi/oto v0.7.1 // indirect
 	github.com/inconshreveable/mousetrap v1.1.0 // indirect

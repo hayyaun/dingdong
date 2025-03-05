@@ -4,6 +4,7 @@ import (
 	"unicode"
 
 	"github.com/gdamore/tcell"
+	"github.com/hayyaun/dingdong/utils"
 )
 
 type Cell struct {
@@ -20,7 +21,7 @@ func updateCells() {
 	ignore := iter%3 != 0 // ignore some rows
 
 	// Chance of 0 - 1 - 2 - 3 - 4 cells
-	n := weightedRandom(chanceToWeightable(chances)).(int)
+	n := utils.WeightedRandom(chanceToWeightable(chances)).(int)
 	if len(lines) < height || ignore {
 		n = 0
 	}
@@ -28,7 +29,7 @@ func updateCells() {
 	// Fill a line with keys
 	line := []*Cell{}
 	for i := 0; i < n; i += 1 {
-		r := weightedRandom(keyToWeightable(keys)).(rune)
+		r := utils.WeightedRandom(keyToWeightable(keys)).(rune)
 		line = append(line, &Cell{r: r, status: None})
 	}
 

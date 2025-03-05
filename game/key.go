@@ -4,6 +4,7 @@ import (
 	"unicode"
 
 	"github.com/gdamore/tcell"
+	. "github.com/hayyaun/dingdong/utils"
 )
 
 type WKey struct {
@@ -30,6 +31,15 @@ func keyToWeightable(keys []WKey) []Weightable {
 		weightables[i] = &keys[i]
 	}
 	return weightables
+}
+
+func mapRuneToIndex(char rune) int {
+	for i, k := range keys {
+		if k.r == char {
+			return i
+		}
+	}
+	return -1 // Return -1 if character is not in slice
 }
 
 func hitLookup(r rune) Status {
