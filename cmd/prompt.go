@@ -28,7 +28,7 @@ func promptGetSelect(pc promptContent) string {
 		index, result, err = prompt.Run()
 
 		if !slices.Contains(game.Modes, result) {
-			index = -1
+			index = -1 // just in case
 		}
 	}
 
