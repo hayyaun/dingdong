@@ -17,7 +17,7 @@ const (
 )
 
 func showScore(screen tcell.Screen) {
-	text := fmt.Sprintf("Score: %v \t\t\t Combo: %v", score, combo)
+	text := fmt.Sprintf("Score: %v \t\t\t Combo: %v \t\t\t Mode: %v", score, combo, Mode)
 	drawText(screen, padx, height+4, text, nil)
 }
 

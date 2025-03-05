@@ -14,6 +14,13 @@ var rootCmd = &cobra.Command{
 	Long:  "Lovely game made for command-line for anyone, even server admins!",
 
 	Run: func(cmd *cobra.Command, args []string) {
+		fmt.Println("\nWelcome to DingDong Game!")
+		fmt.Println("\nPlease select difficulty of the game.")
+		fmt.Println()
+		game.Mode = promptGetSelect(promptContent{
+			"Please select an option.",
+			"How hard should it be?",
+		})
 		game.Play()
 	},
 }

@@ -13,7 +13,14 @@ const (
 	spfx   = 6  // space factor horizontal
 	spfy   = 1  // space factor vertical
 	fps    = 10 // frames per second
+
+	MODE_HARD   = "hard"
+	MODE_NORMAL = "normal"
+	MODE_EASY   = "easy"
 )
+
+var Modes = []string{MODE_EASY, MODE_NORMAL, MODE_HARD}
+var Mode = MODE_NORMAL
 
 func Play() {
 	screen, err := tcell.NewScreen()
