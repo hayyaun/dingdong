@@ -15,15 +15,6 @@ const (
 	fps    = 10 // frames per second
 )
 
-var style = tcell.StyleDefault.Foreground(tcell.ColorWhite)
-var styleBad = tcell.StyleDefault.Foreground(tcell.ColorOrangeRed)
-var styleMeh = tcell.StyleDefault.Foreground(tcell.ColorYellow)
-var styleGood = tcell.StyleDefault.Foreground(tcell.ColorGreen)
-
-// dynamics
-var score = 0
-var combo = 0
-
 func Play() {
 	screen, err := tcell.NewScreen()
 	if err != nil {

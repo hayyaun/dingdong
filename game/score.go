@@ -6,6 +6,10 @@ import (
 	"github.com/gdamore/tcell"
 )
 
+// dynamics
+var score = 0
+var combo = 0
+
 const (
 	GOOD_SCORE = 5
 	MEH_SCORE  = 2
