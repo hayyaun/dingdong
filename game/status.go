@@ -12,12 +12,14 @@ const (
 )
 
 func (status Status) toStyle() tcell.Style {
-	if status == Good {
+	switch status {
+	case Good:
 		return styleGood
-	} else if status == Meh {
+	case Meh:
 		return styleMeh
-	} else if status == Bad {
+	case Bad:
 		return styleBad
+	default:
+		return style
 	}
-	return style
 }
