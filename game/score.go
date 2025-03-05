@@ -6,8 +6,10 @@ import (
 	"github.com/gdamore/tcell"
 )
 
+type Score int
+
 // dynamics
-var score = 0
+var score Score = 0
 var combo = 0
 
 const (
@@ -16,21 +18,9 @@ const (
 	BAD_SCORE  = -1
 )
 
-func drawText(screen tcell.Screen, x, y int, text string, color *tcell.Color) {
-	c := tcell.ColorGreen
-	if color != nil {
-		c = *color
-	}
-	style := tcell.StyleDefault.Foreground(c)
-
-	for i, c := range text {
-		screen.SetContent(x+i, y, rune(c), nil, style) // Convert byte to rune
-	}
-	screen.Show()
-}
-
-func showScore(screen tcell.Screen) {
-	drawText(screen, padx, height+4, fmt.Sprintf("Score: %v \t\t\t Combo: %v", score, combo), nil)
+func (score *Score) show(screen tcell.Screen) {
+	text := fmt.Sprintf("Score: %v \t\t\t Combo: %v", score, combo)
+	drawText(screen, padx, height+4, text, nil)
 }
 
 func checkScore(ev *tcell.EventKey) {
