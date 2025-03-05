@@ -6,10 +6,8 @@ import (
 	"github.com/gdamore/tcell"
 )
 
-type Score int
-
 // dynamics
-var score Score = 0
+var score = 0
 var combo = 0
 
 const (
@@ -18,7 +16,7 @@ const (
 	BAD_SCORE  = -1
 )
 
-func (score *Score) show(screen tcell.Screen) {
+func showScore(screen tcell.Screen) {
 	text := fmt.Sprintf("Score: %v \t\t\t Combo: %v", score, combo)
 	drawText(screen, padx, height+4, text, nil)
 }

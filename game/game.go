@@ -64,7 +64,7 @@ func Play() {
 			updateHits()  // matrix
 			showCells(screen)
 			showKeys(screen)
-			score.show(screen)
+			showScore(screen)
 			screen.Show()
 
 		case <-quit:
