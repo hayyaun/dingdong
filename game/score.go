@@ -29,15 +29,6 @@ func showScore(screen tcell.Screen) {
 	drawText(screen, padx, height+4, fmt.Sprintf("Score: %v \t\t\t Combo: %v", score, combo), nil)
 }
 
-func mapRuneToIndex(char rune) int {
-	for i, k := range keys {
-		if k.v == char {
-			return i
-		}
-	}
-	return -1 // Return -1 if character is not in slice
-}
-
 func checkScore(ev *tcell.EventKey) {
 
 	r := ev.Rune()

@@ -1,6 +1,8 @@
 package game
 
 import (
+	"unicode"
+
 	"github.com/gdamore/tcell"
 )
 
@@ -17,7 +19,7 @@ func updateCells() {
 	iter += 1
 	ignore := iter%2 == 0 // ignore even rows
 
-	// Chance of 1 - 2 - 3 - 4 - 0 elements
+	// Chance of 1 - 2 - 3 - 4 - 0 particles
 	n := weightedRandom(chanceToWeightable(chances)).(int)
 	if len(lines) < height || ignore {
 		n = 0
@@ -43,6 +45,7 @@ func updateCells() {
 func showCells(screen tcell.Screen) {
 	for i, line := range lines {
 		row := (height - i) * spfy // Reverse screen
+		// Show Bars
 		if i < 2 {
 			screen.SetContent(0, row, '+', nil, styleGood) // Good
 		} else if i < 5 {
@@ -50,9 +53,11 @@ func showCells(screen tcell.Screen) {
 		} else {
 			screen.SetContent(0, row, '-', nil, styleBad) // Bad
 		}
+		// Show Particles
 		for _, cell := range line {
 			col := cell.Col*spfx + padx
-			screen.SetContent(col, row, 'X', nil, style) // Draw cell
+			r := unicode.ToUpper(mapIndexToRune(cell.Col))
+			screen.SetContent(col, row, r, nil, style) // Draw cell
 		}
 	}
 }
